@@ -2,7 +2,7 @@
   <img src="https://github.com/mmore21/trojan_lisa/blob/master/img/mona_lisa.jpg" width="100" />
 </p>
 
-<h2 align="center">Trojan Lisa</h2>
+<h2 align="center">trojan_lisa</h2>
 
 <p align="center">
   <a href="https://github.com/mmore21/trojan_lisa/blob/master/LICENSE" title="Last Commit"><img src="https://img.shields.io/github/license/mmore21/trojan_lisa"></a>
@@ -35,7 +35,7 @@ This project is intended solely for educational purposes to better understand va
 
 ## License
 
-wildfire is available under the [MIT License](https://github.com/mmore21/wildfire/blob/master/LICENSE).
+wildfire is available under the [MIT License](https://github.com/mmore21/trojan_lisa/blob/master/LICENSE).
 
 ## References
 
