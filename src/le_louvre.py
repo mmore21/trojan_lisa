@@ -9,6 +9,7 @@ class LeLouvre:
         }
         self.server = server.Server()
 
+    """ Runs an interactive CLI RAT interface. """
     def run_rat_interface(self):
         while True:
             print("Le Louvre RAT Interface")
@@ -25,6 +26,7 @@ class LeLouvre:
             else:
                 self.execute_command(command_key)
 
+    """ Executes command based on the command key provided. """
     def execute_command(self, command_key):
         # Establish server for client connection
         if command_key == 1:

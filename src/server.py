@@ -4,6 +4,7 @@ class Server:
     def __init__(self):
         pass
 
+    """ Server that opens a TCP socket. """
     def host(self):
         serv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         serv.bind(('0.0.0.0', 8080))

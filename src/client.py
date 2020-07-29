@@ -4,6 +4,7 @@ class Client():
     def __init__(self):
         pass
 
+    """ Client that connects to a remote TCP socket. """
     def connect(self):
         client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client.connect(('0.0.0.0', 8080))
