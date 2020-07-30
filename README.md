@@ -28,6 +28,7 @@ TBD
 * File system enumeration and escalation
 * Backdoor access
 * RAT interface for attacker
+* Windows and Unix compatability
 
 ## Disclaimer
 
