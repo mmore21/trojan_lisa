@@ -26,7 +26,7 @@ class Server:
             print("Client disconnected")
 
     def execute(self, command):
-        if command == "2":
+        if command == "1":
             print("Setting background to Mona Lisa")
 
 
