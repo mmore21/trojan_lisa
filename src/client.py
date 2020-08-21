@@ -6,7 +6,7 @@ class Client():
 
     """ Client that connects to a remote TCP socket. """
     def connect(self):
-        self.sock.connect(('0.0.0.0', 8080))
+        self.sock.connect(('127.0.0.1', 8080))
     
     def close(self):
         self.sock.close()

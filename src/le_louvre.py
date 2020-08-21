@@ -5,7 +5,8 @@ class LeLouvre:
         self.commands = {
             "0": "Exit from RAT interface",
             "1": "Replace all images with Mona Lisa",
-            "2": "Revert all images back to their original state"
+            "2": "Revert all images back to their original state",
+            "3": "Set wallpaper to Mona Lisa"
         }
         self.client = client.Client()
 
@@ -25,7 +26,7 @@ class LeLouvre:
             # Exit program
             elif command_key == "0":
                 print("Exiting.")
-                return
+                break
             else:
                 self.execute_command(command_key)
 
@@ -33,14 +34,8 @@ class LeLouvre:
 
     """ Executes command based on the command key provided. """
     def execute_command(self, command_key):
-        # Establish server for client connection
-        if command_key == "1":
-            resp = self.client.message("1")
-            print(resp)
-        # TODO: Set background to Mona Lisa
-        elif command_key == "2":
-            resp = self.client.message("2")
-            print(resp)
+        resp = self.client.message(command_key)
+        print(resp)
             
 if __name__=="__main__":
     le_louvre = LeLouvre()

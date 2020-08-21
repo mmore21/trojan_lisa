@@ -6,7 +6,7 @@ class Server:
 
     """ Server that opens a TCP socket. """
     def host(self):
-        self.serv.bind(('0.0.0.0', 8080))
+        self.serv.bind((socket.INADDR_ANY, 8080))
         self.serv.listen()
         while True:
             conn, addr = self.serv.accept()
@@ -27,7 +27,7 @@ class Server:
 
     def execute(self, command):
         if command == "1":
-            print("Setting background to Mona Lisa")
+            print("Example command")
 
 
 if __name__=="__main__":
