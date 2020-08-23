@@ -6,7 +6,8 @@ class LeLouvre:
             "0": "Exit from RAT interface",
             "1": "Replace all images with Mona Lisa",
             "2": "Revert all images back to their original state",
-            "3": "Set wallpaper to Mona Lisa"
+            "3": "Set wallpaper to Mona Lisa",
+            "4": "Kill the RAT"
         }
         self.client = client.Client()
 
@@ -26,6 +27,10 @@ class LeLouvre:
             # Exit program
             elif command_key == "0":
                 print("Exiting.")
+                break
+            elif command_key == "4":
+                print("Killing RAT and exiting.")
+                self.execute_command(command_key)
                 break
             else:
                 self.execute_command(command_key)
