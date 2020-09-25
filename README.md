@@ -12,7 +12,7 @@ Steganographic remote access trojan.
 
 ## Description
 
-TBD
+Trojan Lisa is a trivial remote access trojan (RAT). It consists of several jovial functions that uses the famous Mona Lisa painting to replace images, revert the images back, and set the background. The project is intended for educational purposes.
 
 ## Design
 
@@ -20,7 +20,15 @@ TBD
 
 ## Usage
 
-TBD
+**Caution, some of the actions available can overwrite data. Please be familiar with the software and its functionality before using it.**
+
+Run the program directly from a terminal interface via Python 3.
+
+<pre>
+python trojan_lisa.py <ip_address>
+</pre>
+
+Future update may include a Windows batch file.
 
 ## Outlook
 
@@ -29,6 +37,7 @@ TBD
 * Backdoor access
 * RAT interface for attacker
 * Windows and Unix compatability
+* Windows batch file executable
 
 ## Disclaimer
 
@@ -36,8 +45,8 @@ This project is intended solely for educational purposes to better understand va
 
 ## License
 
-wildfire is available under the [MIT License](https://github.com/mmore21/trojan_lisa/blob/master/LICENSE).
+trojan_lisa is available under the [MIT License](https://github.com/mmore21/trojan_lisa/blob/master/LICENSE).
 
 ## References
 
-TBD
+* [Remote Access Trojan (RAT) Description](https://blog.malwarebytes.com/threats/remote-access-trojan-rat/)
