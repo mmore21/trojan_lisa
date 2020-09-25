@@ -46,6 +46,8 @@ class TrojanLisa:
             print("Restoring original images...")
             self.restore_images(os.curdir)
         elif command == "3":
+            if sys.platform != "win32":
+                return False
             print("Changing background...")
             self.change_wallpaper()
         elif command == "4":
