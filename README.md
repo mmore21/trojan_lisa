@@ -33,9 +33,6 @@ Future update may include a Windows batch file.
 ## Outlook
 
 * Steganography to embed malware inside image
-* File system enumeration and escalation
-* Backdoor access
-* RAT interface for attacker
 * Windows and Unix compatability
 * Windows batch file executable
 
