@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/mmore21/trojan_lisa/blob/master/img/mona_lisa.png" width="100" />
+  <img src="https://github.com/mmore21/trojan_lisa/blob/master/img/mona_lisa.png.trojanlisa" width="100" />
 </p>
 
 <h2 align="center">trojan_lisa</h2>
