@@ -1,49 +1,68 @@
 <p align="center">
-  <img src="https://github.com/mmore21/trojan_lisa/blob/master/img/mona_lisa.jpg" width="100" />
+  <img src="https://github.com/mmore21/trojan_lisa/blob/master/img/mona_lisa.png" width="100" />
 </p>
 
 <h2 align="center">trojan_lisa</h2>
 
-<p align="center">
-  <a href="https://github.com/mmore21/trojan_lisa/blob/master/LICENSE" title="Last Commit"><img src="https://img.shields.io/github/license/mmore21/trojan_lisa"></a>
-</p>
-
-Steganographic remote access trojan.
+Steganographic reverse shell embedded within the Mona Lisa.
 
 ## Description
 
-Trojan Lisa is a trivial remote access trojan (RAT). It consists of several jovial functions that uses the famous Mona Lisa painting to replace images, revert the images back, and set the background. The project is intended for educational purposes.
+Trojan Lisa is a steganographic engine that embeds a reverse shell within a PNG image of the Mona Lisa. Extracting and executing the code hidden within the image will provide the attacker with a reverse shell. The steganographic engine can be repurposed to store any form of data inside any PNG image given that there are enough pixels to store the encoded message.
 
-## Design
-
-TBD
+The message is encoded by converting it to base64 and then to binary. Next, each pixel of the original image is iterated row-by-row. The message is integrated into the image by making the evenness or oddness of the bits match between the i-th pixel and the i-th bit of the message. In cases where the bits mismatch, the pixel of the image can be decremented by one to correct it. Note, the edge case when the pixel is already zero causes the pixel to be incremented by one instead. Afterward, the image can be reconstructed with the slightly adjust pixel values which now contain the encoded message. This process can be reversed by following the steps in the reverse order.
 
 ## Usage
 
-**Caution, some of the actions available can overwrite data. Please be familiar with the software and its functionality before using it.**
-
-Run the program directly from a terminal interface via Python 3.
+Terminal 1
 
 <pre>
-python trojan_lisa.py <ip_address>
+python3 trojan_lisa/stego.py trojan_lisa/reverse_shell.py img/mona_lisa.png img/mona_lisa.png.trojanlisa
+
+          .------.
+         /        \
+       .' /  \     `.
+_______|____________|
+ """""8""""""""""8888
+     d8.-=. ,==-.:888b
+     >8 `~` :`~' d8888
+     88         ,88888
+     88b. `-~  ':88888
+     888b ~==~ .:88888
+     88888o--:':::8888
+     `88888| :::' 8888b
+     8888^^'       8888b
+    d888           ,%888b.
+   d88%            %%%8--'-.
+  /88:.__ ,       _%-' ---  -
+      """::===..-'   =  --.  `
+    
+
+ _____           _                 __ _           
+/__   \_ __ ___ (_) __ _ _ __     / /(_)___  __ _ 
+  / /\| '__/ _ \| |/ _` | '_ \   / / | / __|/ _` |
+ / /  | | | (_) | | (_| | | | | / /__| \__ | (_| |
+ \/   |_|  \____/ |\__,_|_| |_| \____|_|___/\__,_|
+              |__/                                
+    
+== Preparing the canvas...
+== Painting La Joconde...
+== Visiting Le Louvre...
+== La simplicité est la sophistication suprême...
 </pre>
 
-Future update may include a Windows batch file.
+Terminal 2
 
-## Outlook
-
-* Steganography to embed malware inside image
-* Windows and Unix compatability
-* Windows batch file executable
+<pre>
+nc -lvnp 4444                         
+listening on [any] 4444 ...
+connect to [127.0.0.1] from (UNKNOWN) [127.0.0.1] 33390
+</pre>
 
 ## Disclaimer
 
-This project is intended solely for educational purposes to better understand various malware techniques. It is not to be distributed, modified, or used for any malicious intent. As stated in the license below, the authors of this repository take no responsibility for any malicious use of this malware.
+This project is intended solely for educational purposes to better understand various malware techniques. It is not to be distributed, modified, or used for any malicious intent. The authors of this repository take no responsibility for any malicious use of this malware.
 
-## License
+## Resources
 
-trojan_lisa is available under the [MIT License](https://github.com/mmore21/trojan_lisa/blob/master/LICENSE).
-
-## References
-
-* [Remote Access Trojan (RAT) Description](https://blog.malwarebytes.com/threats/remote-access-trojan-rat/)
+- https://docs.replit.com/tutorials/steganography

@@ -1,0 +1,5 @@
+pypng==0.20220715.0
+pip-autoremove==0.10.0
+isort==5.10.1
+flake8==5.0.0
+black==22.6.0
